@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Eye, EyeOff, Car } from 'lucide-react'
 import { createClient } from '@/lib/supabase-client'
+import { getAuthRedirectUrl } from '@/lib/utils/url'
 
 function SignUpForm() {
   const [formData, setFormData] = useState({
@@ -56,6 +57,7 @@ function SignUpForm() {
         email: formData.email,
         password: formData.password,
         options: {
+          emailRedirectTo: getAuthRedirectUrl('/dashboard'),
           data: {
             full_name: formData.fullName,
             phone: formData.phone,
