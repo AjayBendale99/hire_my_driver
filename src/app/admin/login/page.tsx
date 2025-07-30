@@ -29,7 +29,7 @@ export default function AdminLogin() {
         }))
         
         router.push('/admin/drivers')
-      } catch (error) {
+      } catch {
         setError('Login failed. Please try again.')
       }
     } else {

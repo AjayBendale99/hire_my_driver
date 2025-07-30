@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { Car, User, FileText, Clock, CheckCircle, XCircle } from 'lucide-react'
+import { Car, FileText, Clock, CheckCircle, XCircle } from 'lucide-react'
 import { createClient } from '@/lib/supabase-client'
 
 export default function DriverDashboard() {
