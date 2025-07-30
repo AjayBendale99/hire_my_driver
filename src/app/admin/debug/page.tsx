@@ -3,9 +3,26 @@
 import { useEffect, useState } from 'react'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 
+interface User {
+  id: string
+  email: string
+  full_name: string
+  role: string
+  created_at: string
+}
+
+interface DriverProfile {
+  id: string
+  user_id: string
+  status: string
+  experience_years: number
+  vehicle_types: string[]
+  created_at: string
+}
+
 export default function DatabaseDebugPage() {
-  const [users, setUsers] = useState<any[]>([])
-  const [driverProfiles, setDriverProfiles] = useState<any[]>([])
+  const [users, setUsers] = useState<User[]>([])
+  const [driverProfiles, setDriverProfiles] = useState<DriverProfile[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const supabase = createClientComponentClient()
@@ -45,7 +62,7 @@ export default function DatabaseDebugPage() {
     }
 
     checkDatabase()
-  }, [])
+  }, [supabase])
 
   if (loading) {
     return (
@@ -87,7 +104,7 @@ export default function DatabaseDebugPage() {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {users.map((user: any) => (
+                {users.map((user: User) => (
                   <tr key={user.id}>
                     <td className="px-4 py-4 text-sm text-gray-900 font-mono">{user.id.slice(0, 8)}...</td>
                     <td className="px-4 py-4 text-sm text-gray-900">{user.email}</td>
@@ -131,7 +148,7 @@ export default function DatabaseDebugPage() {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {driverProfiles.map((profile: any) => (
+                {driverProfiles.map((profile: DriverProfile) => (
                   <tr key={profile.id}>
                     <td className="px-4 py-4 text-sm text-gray-900 font-mono">{profile.id.slice(0, 8)}...</td>
                     <td className="px-4 py-4 text-sm text-gray-900 font-mono">{profile.user_id.slice(0, 8)}...</td>
@@ -163,9 +180,9 @@ export default function DatabaseDebugPage() {
         <ul className="text-blue-700 text-sm space-y-1">
           <li>• Total Users: {users.length}</li>
           <li>• Total Driver Profiles: {driverProfiles.length}</li>
-          <li>• Pending Profiles: {driverProfiles.filter((p: any) => p.status === 'pending').length}</li>
-          <li>• Approved Profiles: {driverProfiles.filter((p: any) => p.status === 'approved').length}</li>
-          <li>• Rejected Profiles: {driverProfiles.filter((p: any) => p.status === 'rejected').length}</li>
+          <li>• Pending Profiles: {driverProfiles.filter((p: DriverProfile) => p.status === 'pending').length}</li>
+          <li>• Approved Profiles: {driverProfiles.filter((p: DriverProfile) => p.status === 'approved').length}</li>
+          <li>• Rejected Profiles: {driverProfiles.filter((p: DriverProfile) => p.status === 'rejected').length}</li>
         </ul>
       </div>
     </div>

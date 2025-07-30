@@ -85,7 +85,7 @@ export default function AdminDriverApproval() {
     }
 
     loadDrivers()
-  }, [])
+  }, [supabase])
 
   const updateDriverStatus = async (driverId: string, status: 'approved' | 'rejected') => {
     setUpdating(driverId)
