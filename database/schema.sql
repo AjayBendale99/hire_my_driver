@@ -1,9 +1,6 @@
 -- Hire Drive Database Schema for Supabase
 -- Run these commands in your Supabase SQL editor
 
--- Enable Row Level Security
-ALTER DATABASE postgres SET "app.settings.jwt_secret" TO 'your-jwt-secret';
-
 -- Create custom types
 CREATE TYPE user_role AS ENUM ('customer', 'driver', 'admin');
 CREATE TYPE approval_status AS ENUM ('pending', 'approved', 'rejected');
