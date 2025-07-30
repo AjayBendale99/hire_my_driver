@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { createClient } from '@/lib/supabase-client'
 import Link from 'next/link'
 
 export default function AdminLogin() {
@@ -30,7 +29,7 @@ export default function AdminLogin() {
         }))
         
         router.push('/admin/drivers')
-      } catch (err) {
+      } catch (error) {
         setError('Login failed. Please try again.')
       }
     } else {

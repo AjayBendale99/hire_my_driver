@@ -7,11 +7,22 @@ import { Car, User, FileText, Clock, CheckCircle, XCircle } from 'lucide-react'
 import { createClient } from '@/lib/supabase-client'
 
 export default function DriverDashboard() {
-  const [user, setUser] = useState<any>(null)
-  const [profile, setProfile] = useState<any>(null)
-  const [driverProfile, setDriverProfile] = useState<any>(null)
+  const [profile, setProfile] = useState<{
+    full_name: string
+    email: string
+    phone: string
+    role: string
+  } | null>(null)
+  const [driverProfile, setDriverProfile] = useState<{
+    id: string
+    experience_years: number
+    vehicle_types: string[]
+    license_number: string
+    status: 'pending' | 'approved' | 'rejected'
+    bio?: string
+    location: string
+  } | null>(null)
   const [loading, setLoading] = useState(true)
-  const [sessionChecked, setSessionChecked] = useState(false)
   const router = useRouter()
   const supabase = createClient()
 
@@ -34,9 +45,6 @@ export default function DriverDashboard() {
           router.push('/auth/login')
           return
         }
-
-        console.log('User found:', user.email)
-        setUser(user)
 
         // Get user profile
         const { data: userProfile, error: profileError } = await supabase
@@ -62,7 +70,6 @@ export default function DriverDashboard() {
 
         setDriverProfile(driverData)
         setLoading(false)
-        setSessionChecked(true)
       } catch (error) {
         console.error('Dashboard error:', error)
         router.push('/auth/login')
@@ -93,7 +100,7 @@ export default function DriverDashboard() {
     return () => {
       subscription.unsubscribe()
     }
-  }, [])
+  }, [router, supabase])
 
   const handleLogout = async () => {
     await supabase.auth.signOut()
@@ -178,7 +185,7 @@ export default function DriverDashboard() {
                       Complete Your Driver Profile
                     </h3>
                     <p className="text-gray-600 mb-4">
-                      You haven't completed your driver registration yet. Complete your profile to start earning as a driver.
+                      You haven&apos;t completed your driver registration yet. Complete your profile to start earning as a driver.
                     </p>
                     <Link
                       href="/driver/register"
@@ -224,7 +231,7 @@ export default function DriverDashboard() {
                     {driverProfile.status === 'pending' && (
                       <div className="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
                         <p className="text-yellow-700">
-                          Your profile is under review. You'll be notified once it's approved by our admin team.
+                          Your profile is under review. You&apos;ll be notified once it&apos;s approved by our admin team.
                         </p>
                       </div>
                     )}

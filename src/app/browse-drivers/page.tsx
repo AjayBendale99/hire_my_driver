@@ -25,7 +25,7 @@ interface DriverProfile {
 }
 
 // Utility function to ensure proper Supabase public URLs
-const getPublicUrl = (supabase: any, path: string | null) => {
+const getPublicUrl = (supabase: ReturnType<typeof createClient>, path: string | null) => {
   if (!path) return null
   
   // If it's already a full URL, return as is

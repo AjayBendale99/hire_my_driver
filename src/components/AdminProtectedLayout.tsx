@@ -39,7 +39,7 @@ export default function AdminProtectedLayout({
         }
 
         setIsAuthenticated(true)
-      } catch (error) {
+      } catch {
         localStorage.removeItem('adminSession')
         router.push('/admin/login')
       }

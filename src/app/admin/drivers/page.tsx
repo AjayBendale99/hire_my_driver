@@ -25,7 +25,7 @@ interface DriverProfile {
 }
 
 // Utility function to ensure proper Supabase public URLs
-const getPublicUrl = (supabase: any, path: string | null) => {
+const getPublicUrl = (supabase: ReturnType<typeof createClient>, path: string | null) => {
   if (!path) return null
   
   // If it's already a full URL, return as is
@@ -155,7 +155,7 @@ export default function AdminDriverApproval() {
                       <div>
                         <p className="text-sm font-medium text-gray-700 mb-1">Driving License</p>
                         <a 
-                          href={getPublicUrl(supabase, driver.license_document_url)} 
+                          href={getPublicUrl(supabase, driver.license_document_url) || '#'} 
                           target="_blank" 
                           rel="noopener noreferrer"
                           className="text-blue-600 hover:text-blue-800 text-sm underline"
@@ -167,7 +167,7 @@ export default function AdminDriverApproval() {
                       <div>
                         <p className="text-sm font-medium text-gray-700 mb-1">Aadhar Card</p>
                         <a 
-                          href={getPublicUrl(supabase, driver.aadhar_document_url)} 
+                          href={getPublicUrl(supabase, driver.aadhar_document_url) || '#'} 
                           target="_blank" 
                           rel="noopener noreferrer"
                           className="text-blue-600 hover:text-blue-800 text-sm underline"
@@ -180,7 +180,7 @@ export default function AdminDriverApproval() {
                         <div>
                           <p className="text-sm font-medium text-gray-700 mb-1">Profile Photo</p>
                           <a 
-                            href={getPublicUrl(supabase, driver.profile_image_url)} 
+                            href={getPublicUrl(supabase, driver.profile_image_url) || '#'} 
                             target="_blank" 
                             rel="noopener noreferrer"
                             className="text-blue-600 hover:text-blue-800 text-sm underline"
