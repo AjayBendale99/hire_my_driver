@@ -1,0 +1,43 @@
+# 🚀 Quick Deployment Script
+
+echo "🚗 Hire Drive - Production Deployment"
+echo "======================================"
+
+echo "📋 Step 1: Create GitHub Repository"
+echo "1. Go to https://github.com/new"
+echo "2. Repository name: hire-drive-website"
+echo "3. Make it Public (for free Vercel deployment)"
+echo "4. Don't initialize with README (we already have one)"
+echo "5. Click 'Create repository'"
+echo ""
+
+echo "📤 Step 2: Push to GitHub"
+echo "Copy and run these commands:"
+echo ""
+echo "git remote add origin https://github.com/YOUR-USERNAME/hire-drive-website.git"
+echo "git branch -M main"
+echo "git push -u origin main"
+echo ""
+
+echo "🗄️ Step 3: Set up Supabase"
+echo "1. Go to https://supabase.com"
+echo "2. Create new project: 'hire-drive-prod'"
+echo "3. Choose region closest to India"
+echo "4. Wait for setup (2-3 minutes)"
+echo "5. Go to SQL Editor and run database/schema.sql"
+echo "6. Copy API keys from Settings → API"
+echo ""
+
+echo "🚀 Step 4: Deploy to Vercel"
+echo "1. Go to https://vercel.com"
+echo "2. Import your GitHub repository"
+echo "3. Add environment variables:"
+echo "   - NEXT_PUBLIC_SUPABASE_URL"
+echo "   - NEXT_PUBLIC_SUPABASE_ANON_KEY"
+echo "   - SUPABASE_SERVICE_ROLE_KEY"
+echo "   - NEXT_PUBLIC_APP_URL"
+echo "4. Deploy!"
+echo ""
+
+echo "✅ Your Hire Drive platform will be live!"
+echo "📖 See DEPLOYMENT.md for detailed instructions"
