@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: 'Admin Dashboard - Hire Drive',
@@ -21,18 +22,18 @@ export default function AdminLayout({
               </h1>
             </div>
             <div className="flex items-center space-x-4">
-              <a 
+              <Link 
                 href="/admin/drivers" 
                 className="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
               >
                 Driver Approvals
-              </a>
-              <a 
+              </Link>
+              <Link 
                 href="/" 
                 className="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
               >
                 Back to Website
-              </a>
+              </Link>
             </div>
           </div>
         </div>

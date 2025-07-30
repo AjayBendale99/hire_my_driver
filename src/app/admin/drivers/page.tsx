@@ -30,32 +30,32 @@ export default function AdminDriverApproval() {
   const supabase = createClientComponentClient()
 
   useEffect(() => {
-    fetchPendingDrivers()
-  }, [])
+    const loadDrivers = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('driver_profiles')
+          .select(`
+            *,
+            users (
+              full_name,
+              email,
+              phone
+            )
+          `)
+          .eq('status', 'pending')
+          .order('created_at', { ascending: false })
 
-  const fetchPendingDrivers = async () => {
-    try {
-      const { data, error } = await supabase
-        .from('driver_profiles')
-        .select(`
-          *,
-          users (
-            full_name,
-            email,
-            phone
-          )
-        `)
-        .eq('status', 'pending')
-        .order('created_at', { ascending: false })
-
-      if (error) throw error
-      setDrivers(data || [])
-    } catch (error) {
-      console.error('Error fetching drivers:', error)
-    } finally {
-      setLoading(false)
+        if (error) throw error
+        setDrivers(data || [])
+      } catch (error) {
+        console.error('Error fetching drivers:', error)
+      } finally {
+        setLoading(false)
+      }
     }
-  }
+
+    loadDrivers()
+  }, [])
 
   const updateDriverStatus = async (driverId: string, status: 'approved' | 'rejected') => {
     setUpdating(driverId)

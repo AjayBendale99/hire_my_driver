@@ -128,7 +128,7 @@ export default function AdminDashboard() {
                 You can also approve drivers directly in your Supabase database:
               </p>
               <div className="bg-white rounded p-3 text-sm font-mono text-gray-700">
-                UPDATE driver_profiles SET status = 'approved' WHERE status = 'pending';
+                UPDATE driver_profiles SET status = &apos;approved&apos; WHERE status = &apos;pending&apos;;
               </div>
             </div>
             
