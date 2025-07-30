@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Hire Drive - Professional Driver Booking Platform
 
 A comprehensive web platform that connects customers with verified professional drivers across India. Built with Next.js 15, TypeScript, Tailwind CSS, and Supabase.
