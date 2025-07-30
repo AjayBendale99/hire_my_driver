@@ -27,11 +27,35 @@ export default function AdminDriverApproval() {
   const [drivers, setDrivers] = useState<DriverProfile[]>([])
   const [loading, setLoading] = useState(true)
   const [updating, setUpdating] = useState<string | null>(null)
+  const [debugInfo, setDebugInfo] = useState<string>('')
   const supabase = createClientComponentClient()
 
   useEffect(() => {
     const loadDrivers = async () => {
       try {
+        setDebugInfo('Starting to fetch drivers...')
+        
+        // First, let's check all drivers regardless of status
+        const { data: allDrivers, error: allError } = await supabase
+          .from('driver_profiles')
+          .select(`
+            *,
+            users (
+              full_name,
+              email,
+              phone
+            )
+          `)
+          .order('created_at', { ascending: false })
+
+        if (allError) {
+          setDebugInfo(`Error fetching all drivers: ${allError.message}`)
+          throw allError
+        }
+
+        setDebugInfo(`Found ${allDrivers?.length || 0} total drivers`)
+
+        // Now filter for pending only
         const { data, error } = await supabase
           .from('driver_profiles')
           .select(`
@@ -45,10 +69,16 @@ export default function AdminDriverApproval() {
           .eq('status', 'pending')
           .order('created_at', { ascending: false })
 
-        if (error) throw error
+        if (error) {
+          setDebugInfo(`Error fetching pending drivers: ${error.message}`)
+          throw error
+        }
+        
+        setDebugInfo(`Found ${data?.length || 0} pending drivers out of ${allDrivers?.length || 0} total`)
         setDrivers(data || [])
       } catch (error) {
         console.error('Error fetching drivers:', error)
+        setDebugInfo(`Error: ${error}`)
       } finally {
         setLoading(false)
       }
@@ -97,12 +127,29 @@ export default function AdminDriverApproval() {
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold text-gray-900 mb-8">Driver Approval Dashboard</h1>
       
+      {/* Debug Info */}
+      <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+        <h3 className="font-medium text-blue-800 mb-2">🔍 Debug Information</h3>
+        <p className="text-blue-700 text-sm">{debugInfo}</p>
+      </div>
+      
       {drivers.length === 0 ? (
         <div className="text-center py-12">
           <div className="text-gray-500 text-lg">
             🎉 No pending driver applications!
           </div>
           <p className="text-gray-400 mt-2">All drivers have been reviewed.</p>
+          <div className="mt-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+            <p className="text-yellow-700 text-sm">
+              <strong>Troubleshooting:</strong> If you submitted driver registrations but don&apos;t see them here:
+            </p>
+            <ul className="text-yellow-700 text-sm mt-2 list-disc list-inside">
+              <li>Check if the registration form completed successfully</li>
+              <li>Verify in Supabase Table Editor → driver_profiles</li>
+              <li>Check browser console for any errors</li>
+              <li>Make sure you&apos;re using the same Supabase project</li>
+            </ul>
+          </div>
         </div>
       ) : (
         <div className="grid gap-6">
