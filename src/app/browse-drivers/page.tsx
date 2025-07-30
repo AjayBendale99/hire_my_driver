@@ -24,6 +24,21 @@ interface DriverProfile {
   }
 }
 
+// Utility function to ensure proper Supabase public URLs
+const getPublicUrl = (supabase: any, path: string | null) => {
+  if (!path) return null
+  
+  // If it's already a full URL, return as is
+  if (path.startsWith('http')) return path
+  
+  // Generate public URL from Supabase storage
+  const { data } = supabase.storage
+    .from('documents')
+    .getPublicUrl(path)
+  
+  return data.publicUrl
+}
+
 export default function BrowseDrivers() {
   const [drivers, setDrivers] = useState<DriverProfile[]>([])
   const [filteredDrivers, setFilteredDrivers] = useState<DriverProfile[]>([])
@@ -242,7 +257,7 @@ export default function BrowseDrivers() {
                 <div className="h-48 bg-gray-200 relative">
                   {driver.profile_image_url ? (
                     <Image
-                      src={driver.profile_image_url}
+                      src={getPublicUrl(supabase, driver.profile_image_url) || '/placeholder-avatar.png'}
                       alt={driver.users.full_name}
                       fill
                       className="object-cover"

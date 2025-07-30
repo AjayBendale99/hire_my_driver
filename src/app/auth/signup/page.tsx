@@ -84,7 +84,15 @@ function SignUpForm() {
 
         if (profileError) {
           console.error('Profile creation error:', profileError)
-          setError('Failed to create user profile. Please try again.')
+          console.error('Error details:', JSON.stringify(profileError, null, 2))
+          console.error('User data being inserted:', {
+            id: authData.user.id,
+            email: formData.email,
+            full_name: formData.fullName,
+            phone: formData.phone,
+            role: formData.role
+          })
+          setError(`Failed to create user profile: ${profileError.message || 'Unknown error'}`)
           setIsLoading(false)
           return
         }
@@ -151,7 +159,7 @@ function SignUpForm() {
                 required
                 value={formData.fullName}
                 onChange={(e) => setFormData(prev => ({ ...prev, fullName: e.target.value }))}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                 placeholder="Enter your full name"
               />
             </div>
@@ -166,7 +174,7 @@ function SignUpForm() {
                 required
                 value={formData.email}
                 onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                 placeholder="Enter your email"
               />
             </div>
@@ -181,7 +189,7 @@ function SignUpForm() {
                 required
                 value={formData.phone}
                 onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                 placeholder="Enter your phone number"
               />
             </div>
@@ -197,7 +205,7 @@ function SignUpForm() {
                   required
                   value={formData.password}
                   onChange={(e) => setFormData(prev => ({ ...prev, password: e.target.value }))}
-                  className="block w-full px-3 py-2 pr-10 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                  className="block w-full px-3 py-2 pr-10 border border-gray-300 rounded-md shadow-sm text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                   placeholder="Enter your password"
                 />
                 <button
@@ -225,7 +233,7 @@ function SignUpForm() {
                   required
                   value={formData.confirmPassword}
                   onChange={(e) => setFormData(prev => ({ ...prev, confirmPassword: e.target.value }))}
-                  className="block w-full px-3 py-2 pr-10 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                  className="block w-full px-3 py-2 pr-10 border border-gray-300 rounded-md shadow-sm text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                   placeholder="Confirm your password"
                 />
                 <button

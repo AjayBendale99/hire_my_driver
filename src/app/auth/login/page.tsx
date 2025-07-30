@@ -36,6 +36,9 @@ export default function Login() {
       }
 
       if (data.user) {
+        // Wait for session to be established
+        await new Promise(resolve => setTimeout(resolve, 200))
+        
         // Get user profile to determine redirect
         const { data: profile } = await supabase
           .from('users')
@@ -92,7 +95,7 @@ export default function Login() {
                 required
                 value={formData.email}
                 onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                 placeholder="Enter your email"
               />
             </div>
@@ -108,7 +111,7 @@ export default function Login() {
                   required
                   value={formData.password}
                   onChange={(e) => setFormData(prev => ({ ...prev, password: e.target.value }))}
-                  className="block w-full px-3 py-2 pr-10 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                  className="block w-full px-3 py-2 pr-10 border border-gray-300 rounded-md shadow-sm text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                   placeholder="Enter your password"
                 />
                 <button

@@ -87,7 +87,13 @@ export default function DriverRegister() {
       .upload(path, file)
 
     if (error) throw error
-    return data.path
+    
+    // Generate public URL for the uploaded file
+    const { data: publicUrlData } = supabase.storage
+      .from('documents')
+      .getPublicUrl(data.path)
+    
+    return publicUrlData.publicUrl
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -250,7 +256,7 @@ export default function DriverRegister() {
                     max="50"
                     value={formData.experienceYears}
                     onChange={(e) => setFormData(prev => ({ ...prev, experienceYears: e.target.value }))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                     placeholder="e.g., 5"
                   />
                 </div>
@@ -264,7 +270,7 @@ export default function DriverRegister() {
                     required
                     value={formData.licenseNumber}
                     onChange={(e) => setFormData(prev => ({ ...prev, licenseNumber: e.target.value }))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                     placeholder="e.g., MH12 20220012345"
                   />
                 </div>
@@ -280,7 +286,7 @@ export default function DriverRegister() {
                   required
                   value={formData.location}
                   onChange={(e) => setFormData(prev => ({ ...prev, location: e.target.value }))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                   placeholder="e.g., Mumbai, Maharashtra"
                 />
               </div>
@@ -293,7 +299,7 @@ export default function DriverRegister() {
                   rows={3}
                   value={formData.bio}
                   onChange={(e) => setFormData(prev => ({ ...prev, bio: e.target.value }))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                   placeholder="Tell customers about yourself, your driving experience, and specializations..."
                 />
               </div>
@@ -318,7 +324,7 @@ export default function DriverRegister() {
                     onClick={() => handleVehicleTypeChange(vehicle.id)}
                   >
                     <div className="text-2xl mb-2">{vehicle.icon}</div>
-                    <div className="text-sm font-medium">{vehicle.label}</div>
+                    <div className="text-sm font-medium text-gray-900">{vehicle.label}</div>
                   </div>
                 ))}
               </div>

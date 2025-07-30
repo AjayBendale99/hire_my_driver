@@ -98,6 +98,9 @@ export function Navbar() {
               </div>
             ) : (
               <div className="flex items-center space-x-4">
+                <Link href="/admin/login" className="text-gray-700 hover:text-blue-600 transition-colors text-sm">
+                  Admin
+                </Link>
                 <Link href="/auth/login" className="text-gray-700 hover:text-blue-600 transition-colors">
                   Login
                 </Link>
@@ -175,6 +178,13 @@ export function Navbar() {
               </>
             ) : (
               <>
+                <Link
+                  href="/admin/login"
+                  className="block px-3 py-2 text-gray-700 hover:text-blue-600 text-sm"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Admin Login
+                </Link>
                 <Link
                   href="/auth/login"
                   className="block px-3 py-2 text-gray-700 hover:text-blue-600"

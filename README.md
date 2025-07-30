@@ -28,6 +28,11 @@ A comprehensive web platform that connects customers with verified professional 
 - Monitor platform activity and analytics
 - Content moderation and quality control
 
+**Admin Login Credentials:**
+- URL: `/admin/login`
+- Username: `admin`
+- Password: `admin@123`
+
 ## 🛠 Tech Stack
 
 - **Frontend**: Next.js 15 with App Router, TypeScript, Tailwind CSS
