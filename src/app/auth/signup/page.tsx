@@ -84,6 +84,9 @@ function SignUpForm() {
 
         if (profileError) {
           console.error('Profile creation error:', profileError)
+          setError('Failed to create user profile. Please try again.')
+          setIsLoading(false)
+          return
         }
 
         // Redirect based on role

@@ -115,6 +115,33 @@ export default function DriverRegister() {
     }
 
     try {
+      // First, ensure user record exists in users table
+      const { data: existingUser, error: userCheckError } = await supabase
+        .from('users')
+        .select('*')
+        .eq('id', user.id)
+        .single()
+
+      if (userCheckError && userCheckError.code === 'PGRST116') {
+        // User doesn't exist, create user record
+        const { error: userCreateError } = await supabase
+          .from('users')
+          .insert({
+            id: user.id,
+            email: user.email || '',
+            full_name: 'Driver User',
+            phone: '+911234567890',
+            role: 'driver'
+          })
+
+        if (userCreateError) {
+          setError('Failed to create user profile. Please try again.')
+          console.error('User creation error:', userCreateError)
+          setIsLoading(false)
+          return
+        }
+      }
+
       // Upload documents
       const licenseDocPath = await uploadFile(
         files.licenseDocument,
