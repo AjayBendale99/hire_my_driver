@@ -67,6 +67,12 @@ export function Navbar() {
             <Link href="/browse-drivers" className="text-gray-700 hover:text-blue-600 transition-colors">
               Browse Drivers
             </Link>
+            <a href="https://three-ai-project-one.vercel.app" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-blue-600 transition-colors">
+              About Us
+            </a>
+            <a href="https://startupzero.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-blue-600 transition-colors">
+              Contact
+            </a>
             {user ? (
               <div className="flex items-center space-x-4">
                 {userProfile?.role === 'admin' && (
@@ -134,6 +140,24 @@ export function Navbar() {
             >
               Browse Drivers
             </Link>
+            <a
+              href="https://three-ai-project-one.vercel.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block px-3 py-2 text-gray-700 hover:text-blue-600"
+              onClick={() => setIsOpen(false)}
+            >
+              About Us
+            </a>
+            <a
+              href="https://startupzero.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block px-3 py-2 text-gray-700 hover:text-blue-600"
+              onClick={() => setIsOpen(false)}
+            >
+              Contact
+            </a>
             {user ? (
               <>
                 {userProfile?.role === 'admin' && (

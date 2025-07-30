@@ -47,14 +47,14 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="text-gray-300 hover:text-blue-400 transition-colors">
+                <a href="https://three-ai-project-one.vercel.app" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-blue-400 transition-colors">
                   About Us
-                </Link>
+                </a>
               </li>
               <li>
-                <Link href="/contact" className="text-gray-300 hover:text-blue-400 transition-colors">
+                <a href="https://startupzero.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-blue-400 transition-colors">
                   Contact
-                </Link>
+                </a>
               </li>
               <li>
                 <Link href="/privacy" className="text-gray-300 hover:text-blue-400 transition-colors">

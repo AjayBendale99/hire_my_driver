@@ -122,7 +122,7 @@ export default function DriverRegister() {
 
     try {
       // First, ensure user record exists in users table
-      const { data: existingUser, error: userCheckError } = await supabase
+      const { error: userCheckError } = await supabase
         .from('users')
         .select('*')
         .eq('id', user.id)
