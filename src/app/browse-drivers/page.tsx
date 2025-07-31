@@ -39,7 +39,8 @@ const getPublicUrl = (supabase: ReturnType<typeof createClient>, path: string | 
   return data.publicUrl
 }
 
-// Vehicle type helpers
+// Vehicle type helpers (currently unused but may be needed for future features)
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const getVehicleTypeLabel = (type: string) => {
   const vehicleTypes: Record<string, string> = {
     'car': 'Car',
@@ -56,6 +57,7 @@ const getVehicleTypeLabel = (type: string) => {
   return vehicleTypes[type] || type
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const getVehicleTypeIcon = (type: string) => {
   const icons: Record<string, string> = {
     'car': '🚗',
