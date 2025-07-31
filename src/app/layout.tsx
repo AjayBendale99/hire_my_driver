@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
+import { HelpChatbot } from "@/components/ui/HelpChatbot";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,9 +19,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body 
-        className={`${inter.className} antialiased min-h-screen bg-gray-50`}
+        className={`${inter.className} antialiased min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors`}
         suppressHydrationWarning={true}
       >
         <Navbar />
@@ -28,6 +29,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <HelpChatbot />
       </body>
     </html>
   );
