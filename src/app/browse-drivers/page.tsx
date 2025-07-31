@@ -39,6 +39,39 @@ const getPublicUrl = (supabase: ReturnType<typeof createClient>, path: string | 
   return data.publicUrl
 }
 
+// Vehicle type helpers
+const getVehicleTypeLabel = (type: string) => {
+  const vehicleTypes: Record<string, string> = {
+    'car': 'Car',
+    'bike': 'Motorcycle/Bike',
+    'auto': 'Auto Rickshaw',
+    'taxi': 'Taxi',
+    'truck': 'Truck',
+    'bus': 'Bus',
+    'tempo': 'Tempo',
+    'jcb': 'JCB/Heavy Machinery',
+    'private_jet': 'Private Jet',
+    'other': 'Other Vehicle'
+  }
+  return vehicleTypes[type] || type
+}
+
+const getVehicleTypeIcon = (type: string) => {
+  const icons: Record<string, string> = {
+    'car': '🚗',
+    'bike': '🏍️',
+    'auto': '🛺',
+    'taxi': '🚖',
+    'truck': '🚛',
+    'bus': '🚌',
+    'tempo': '🚐',
+    'jcb': '🚜',
+    'private_jet': '✈️',
+    'other': '🚙'
+  }
+  return icons[type] || '🚙'
+}
+
 export default function BrowseDrivers() {
   const [drivers, setDrivers] = useState<DriverProfile[]>([])
   const [filteredDrivers, setFilteredDrivers] = useState<DriverProfile[]>([])
